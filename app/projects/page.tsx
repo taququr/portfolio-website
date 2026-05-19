@@ -1,14 +1,14 @@
-import { projects } from "@/lib/projects";
+import { PROJECTS } from "@/lib/projects";
 
 const ProjectsPage = () => {
   return (
     <div>
       <h1>Projects</h1>
-      {projects.map((project) => (
+      {PROJECTS.map((project) => (
         <div key={project.id}>
           <h2>{project.title}</h2>
-          <p>{project.description}</p>
-          <p>{project.tag.join(", ")}</p>
+          <p>{project.shortDescription}</p>
+          <p>{project.tags.join(", ")}</p>
         </div>
       ))}
     </div>
