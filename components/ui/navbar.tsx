@@ -24,7 +24,7 @@ export function Navbar() {
           return (
             <Link key={item.href} href={item.href}>
               <span
-                className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors cursor-pointer ${
+                className={`px-3 py-1.5 rounded-xl text-sm font-medium transition-colors cursor-pointer ${
                   isActive
                     ? "bg-secondary text-secondary-foreground"
                     : "text-muted-foreground hover:text-foreground"

@@ -14,9 +14,7 @@ export default function Home() {
     <div className="max-w-5xl mx-auto p-8 font-(family-name:--font-geist-sans)">
       {/* HERO SECTION */}
       <header className="pt-20 pb-12 flex flex-col items-center text-center gap-4">
-        <h1 className="text-5xl font-bold tracking-tight duration-500">
-          Taqie Fadlillah
-        </h1>
+        <h1 className="text-5xl font-bold tracking-tight">Taqie Fadlillah</h1>
         <p className="text-xl text-muted-foreground max-w-[600px]">
           A frontend developer passionate about building responsive and
           performance-optimized web applications.
@@ -42,9 +40,7 @@ export default function Home() {
                   </div>
                 ))}
               </div>
-              <CardTitle className="text-primary duration-200">
-                {project.title}
-              </CardTitle>
+              <CardTitle className="text-primary">{project.title}</CardTitle>
               <CardDescription>{project.shortDescription}</CardDescription>
             </CardHeader>
             <CardContent>
@@ -59,9 +55,7 @@ export default function Home() {
         )).slice(0, 4)}
         <Card className="col-span-2 hover:shadow-lg transition-all duration-500">
           <CardHeader>
-            <CardTitle className="text-primary duration-200">
-              More Projects
-            </CardTitle>
+            <CardTitle className="text-primary">More Projects</CardTitle>
             <CardDescription>Check out my other projects</CardDescription>
           </CardHeader>
           <CardContent>
