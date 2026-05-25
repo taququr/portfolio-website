@@ -49,7 +49,7 @@ function AboutPage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto pt-32 pb-24 px-6 font-(family-name:--font-geist-sans)">
+    <div className="max-w-4xl mx-auto pt-32 pb-24 px-6 font-sans">
       <h1 className="text-4xl font-bold tracking-tight mb-12">
         About & Philosophy
       </h1>
@@ -74,7 +74,7 @@ function AboutPage() {
 
         <Card className="bg-muted/30 border-dashed">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-mono uppercase tracking-wider text-blue-500">
+            <CardTitle className="text-sm font-mono uppercase tracking-wider text-sky-400 dark:text-sky-500">
               System Stacks
             </CardTitle>
           </CardHeader>
@@ -169,7 +169,7 @@ function AboutPage() {
                 render={({ field, fieldState }) => (
                   <Field
                     data-invalid={fieldState.invalid}
-                    className="col-span-1 md:col-span-2"
+                    className="col-span-2"
                   >
                     <FieldLabel htmlFor="message">Message</FieldLabel>
                     <Textarea

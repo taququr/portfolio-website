@@ -7,6 +7,9 @@ export const ProjectSchema = z.object({
   shortDescription: z.string(),
   tags: z.array(z.string()),
   link: z.string().optional(),
+  dateCreated: z.string(),
+  dateUpdated: z.string().optional(),
+  imagesUrl: z.array(z.string()).optional(),
 });
 
 export type Project = z.infer<typeof ProjectSchema>;
@@ -20,6 +23,9 @@ export const PROJECTS: Project[] = [
     link: isFrontend
       ? "http://localhost:3000/project"
       : "https://taqiefadlillah.com/project",
+    dateCreated: "2025-10-14",
+    dateUpdated: "2025-10-14",
+    imagesUrl: ["/projects/portfolio-bg.webp"],
   },
   {
     id: 2,
@@ -30,6 +36,9 @@ export const PROJECTS: Project[] = [
     link: isFrontend
       ? "http://localhost:3000/project"
       : "https://taqiefadlillah.com/project",
+    dateCreated: "2025-10-14",
+    dateUpdated: "2025-10-14",
+    imagesUrl: ["/projects/unraid-bg.webp"],
   },
   {
     id: 3,
@@ -40,6 +49,9 @@ export const PROJECTS: Project[] = [
     link: isFrontend
       ? "http://localhost:3000/project"
       : "https://taqiefadlillah.com/project",
+    dateCreated: "2025-10-14",
+    dateUpdated: "2025-10-14",
+    imagesUrl: ["/projects/certificate-generator-bg.webp"],
   },
   {
     id: 4,
@@ -50,5 +62,8 @@ export const PROJECTS: Project[] = [
     link: isFrontend
       ? "http://localhost:3000/project"
       : "https://taqiefadlillah.com/project",
+    dateCreated: "2025-10-14",
+    dateUpdated: "2025-10-14",
+    imagesUrl: ["/projects/hexa-ai-bg.webp"],
   },
 ];
