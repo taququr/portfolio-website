@@ -13,9 +13,9 @@ export const BlogBlockSchema = z.object({
 export type BlogBlock = z.infer<typeof BlogBlockSchema>;
 
 export const ProjectMetricsSchema = z.object({
-  role: z.string(),
-  environment: z.string(),
-  status: z.enum(["On-going", "Completed", "Maintenance"]),
+  role: z.string().optional(),
+  environment: z.string().optional(),
+  status: z.enum(["On-going", "Completed", "Maintenance"]).optional(),
   repoUrl: z.url().optional(), // .url() validates the structure is a real path link
   liveUrl: z.url().optional(),
 });
@@ -39,13 +39,11 @@ export type Project = z.infer<typeof ProjectSchema>;
 
 export const PROJECTS: Project[] = [
   {
-    id: "1",
+    id: "portfolio-website",
     title: "Next.js Portfolio",
     shortDescription: "Modern portfolio built with React 19 and Tailwind 4.",
     tags: ["Frontend", "Next.js", "TailwindCSS", "shadcn/ui"],
-    link: isFrontend
-      ? "http://localhost:3000/projects"
-      : "https://taququr.com/projects",
+    link: isFrontend ? "http://localhost:3000/projects" : "https://taququr.com/projects",
     dateCreated: "2025-10-14",
     dateUpdated: "2025-10-14",
     heroImage: "/projects/portfolio-bg.webp",
@@ -92,12 +90,9 @@ export const PROJECTS: Project[] = [
   {
     id: "2",
     title: "Self-Hosted Infrastructure",
-    shortDescription:
-      "Built a secure Unraid server with Cloudflare Tunnels and Zero Trust.",
+    shortDescription: "Built a secure Unraid server with Cloudflare Tunnels and Zero Trust.",
     tags: ["Sanity Test", "DevOps", "Unraid", "Cloudflare"],
-    link: isFrontend
-      ? "http://localhost:3000/projects"
-      : "https://taququr.com/projects",
+    link: isFrontend ? "http://localhost:3000/projects" : "https://taququr.com/projects",
     dateCreated: "2025-10-14",
     dateUpdated: "2025-10-14",
     heroImage: "/projects/unraid-bg.webp",
@@ -118,12 +113,9 @@ export const PROJECTS: Project[] = [
   {
     id: "3",
     title: "Certificate Generator",
-    shortDescription:
-      "Built a certificate generator using React and Flask with role-based access control.",
+    shortDescription: "Built a certificate generator using React and Flask with role-based access control.",
     tags: ["Full-Stack", "React", "Flask", "PostgreSQL", "Strapi"],
-    link: isFrontend
-      ? "http://localhost:3000/projects"
-      : "https://taququr.com/projects",
+    link: isFrontend ? "http://localhost:3000/projects" : "https://taququr.com/projects",
     dateCreated: "2025-10-14",
     dateUpdated: "2025-10-14",
     heroImage: "/projects/certificate-generator-bg.webp",
@@ -147,9 +139,7 @@ export const PROJECTS: Project[] = [
     shortDescription:
       "Developed a feature-rich analytics and cloud file-management dashboard with an integrated custom chatbot interface, leveraging Google Drive API integrations.",
     tags: ["Frontend", "Sveltekit", "TailwindCSS", "Svelte Flowbite"],
-    link: isFrontend
-      ? "http://localhost:3000/projects"
-      : "https://taququr.com/projects",
+    link: isFrontend ? "http://localhost:3000/projects" : "https://taququr.com/projects",
     dateCreated: "2025-10-14",
     dateUpdated: "2025-10-14",
     heroImage: "/projects/hexa-ai-bg.webp",
