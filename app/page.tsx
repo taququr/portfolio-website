@@ -26,11 +26,11 @@ export default function Home() {
       <h3 className="text-2xl font-bold mb-4">Work & Projects</h3>
       <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {PROJECTS.map((project) => (
-          <Link href={`/projects/${project.id}`} key={project.id}>
-            <Card
-              key={project.id}
-              className="md:col-span-1 col-span-2 hover:shadow-lg transition-all duration-500"
-            >
+          <Card
+            key={project.id}
+            className="md:col-span-1 col-span-2 border border-muted-foreground/10 hover:border-foreground/30 duration-500"
+          >
+            <Link href={`/projects/${project.id}`}>
               <CardHeader>
                 <div className="flex flex-wrap gap-2 pb-2">
                   {project.tags.map((tag, index) => (
@@ -43,7 +43,9 @@ export default function Home() {
                     </Badge>
                   ))}
                 </div>
-                <CardTitle className="text-primary">{project.title}</CardTitle>
+                <CardTitle className="text-primary duration-75">
+                  {project.title}
+                </CardTitle>
                 <CardDescription>{project.shortDescription}</CardDescription>
               </CardHeader>
               <CardContent>
@@ -51,16 +53,18 @@ export default function Home() {
                   variant="link"
                   className="p-0 text-sky-400 dark:text-sky-500"
                 >
-                  Learn more →
+                  Learn more &rarr;
                 </Button>
               </CardContent>
-            </Card>
-          </Link>
+            </Link>
+          </Card>
         )).slice(0, 4)}
-        <Link href="/projects">
-          <Card className="col-span-2 hover:shadow-lg transition-all duration-500">
+        <Card className="col-span-2 border border-muted-foreground/10 hover:border-foreground/30 duration-500">
+          <Link href="/projects">
             <CardHeader>
-              <CardTitle className="text-primary">More Projects</CardTitle>
+              <CardTitle className="text-primary duration-75">
+                More Projects
+              </CardTitle>
               <CardDescription>Check out my other projects</CardDescription>
             </CardHeader>
             <CardContent>
@@ -68,11 +72,11 @@ export default function Home() {
                 variant="link"
                 className="p-0 text-sky-400 dark:text-sky-500"
               >
-                View all projects →
+                View all projects &rarr;
               </Button>
             </CardContent>
-          </Card>
-        </Link>
+          </Link>
+        </Card>
       </section>
     </div>
   );

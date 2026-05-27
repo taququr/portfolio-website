@@ -26,7 +26,7 @@ export default function ProjectsPage() {
   });
 
   return (
-    <div className="container mx-auto max-w-5xl py-10 px-4 space-y-10 min-h-screen font-sans">
+    <div className="container mx-auto max-w-5xl py-10 px-4 space-y-4 md:space-y-10 min-h-screen font-sans">
       <header className="pt-20 flex flex-col items-center text-center gap-4">
         <h1 className="text-3xl font-mono tracking-tight font-bold uppercase">
           Projects & Works
@@ -72,10 +72,9 @@ export default function ProjectsPage() {
                     key={project.id}
                     className="group block relative w-full overflow-hidden border border-muted-foreground/10 hover:border-foreground/30 transition-colors duration-300 rounded-lg bg-card"
                   >
-                    {/* Lock the desktop height to 200px */}
-                    <div className="flex flex-col min-h-[220px] md:h-[200px] relative w-full">
+                    <div className="flex flex-col min-h-60 md:h-52 relative w-full">
                       <div
-                        className={`w-full md:w-[65%] p-3 md:p-5 flex flex-col justify-between z-20 relative h-full min-h-[220px] md:h-full
+                        className={`w-full md:w-[65%] p-3 md:p-5 flex flex-col justify-between z-20 relative h-full min-h-60 md:h-full
                       ${isEven ? "md:mr-auto" : "md:ml-auto"}`}
                       >
                         <div
@@ -109,17 +108,16 @@ export default function ProjectsPage() {
 
                       <div className="absolute inset-0 w-full h-full z-10 select-none pointer-events-none">
                         <div
-                          className={`absolute top-0 bottom-0 w-full md:w-[45%] h-full transition-all duration-700
-                        filter grayscale contrast-[1.1] brightness-[0.9] dark:brightness-[0.4] md:dark:brightness-[0.6] md:group-hover:brightness-[0.9]
-                        ${isEven ? "right-0" : "left-0"}`}
+                          className={`absolute top-0 bottom-0 w-full md:w-[45%] h-full transition-all duration-700 ease-in-out filter grayscale group-hover:grayscale-0
+                            contrast-[1.1] brightness-[0.9] dark:brightness-[0.4] md:dark:brightness-[0.5] md:group-hover:brightness-[0.8] ${isEven ? "right-0" : "left-0"}`}
                         >
-                          {project.imagesUrl?.[0] ? (
+                          {project.heroImage ? (
                             <Image
-                              src={project.imagesUrl?.[0]}
+                              src={project.heroImage}
                               alt={project.title}
-                              className="object-cover object-center grayscale contrast-[1.1]"
-                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                               fill
+                              className="object-cover object-center"
+                              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                               priority={index < 2}
                             />
                           ) : (
@@ -128,8 +126,8 @@ export default function ProjectsPage() {
                         </div>
 
                         {/* THE INTEGRATED FULL-CARD MASK 
-                      Spans across 100% of the card container to generate a flawless smoky transition.
-                    */}
+                          Spans across 100% of the card container to generate a flawless smoky transition.
+                        */}
                         <div
                           className="hidden md:block absolute inset-0 w-full h-full"
                           style={{
