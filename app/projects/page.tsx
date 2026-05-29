@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic";
+
 import { ProjectsList } from "@/components/projects/projects-list";
 import { Project } from "@/sanity.types";
 import { sanityFetch } from "@/sanity/lib/live";

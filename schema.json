@@ -177,6 +177,10 @@
                   {
                     "type": "string",
                     "value": "Maintenance"
+                  },
+                  {
+                    "type": "string",
+                    "value": "Active Development"
                   }
                 ]
               },
@@ -185,7 +189,21 @@
             "environment": {
               "type": "objectAttribute",
               "value": {
-                "type": "string"
+                "type": "union",
+                "of": [
+                  {
+                    "type": "string",
+                    "value": "Production"
+                  },
+                  {
+                    "type": "string",
+                    "value": "Local"
+                  },
+                  {
+                    "type": "string",
+                    "value": "Archived"
+                  }
+                ]
               },
               "optional": true
             },

@@ -42,8 +42,8 @@ export type Project = {
   dateCreated?: string;
   dateUpdated?: string;
   metrics?: {
-    status?: "On-going" | "Completed" | "Maintenance";
-    environment?: string;
+    status?: "On-going" | "Completed" | "Maintenance" | "Active Development";
+    environment?: "Production" | "Local" | "Archived";
     role?: string;
     repoUrl?: string;
     liveUrl?: string;

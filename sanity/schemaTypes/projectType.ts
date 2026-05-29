@@ -42,13 +42,19 @@ export const projectType = defineType({
     defineField({
       name: "dateCreated",
       title: "Deployment Date",
-      type: "string",
+      type: "date",
+      options: {
+        dateFormat: "YYYY-MM-DD",
+      },
       validation: (Rule) => Rule.required().error("A deployment date is required."),
     }),
     defineField({
       name: "dateUpdated",
       title: "Last Updated Date",
-      type: "string",
+      type: "date",
+      options: {
+        dateFormat: "YYYY-MM-DD",
+      },
       validation: (Rule) => Rule.required().error("A last updated date is required."),
     }),
 
@@ -62,9 +68,14 @@ export const projectType = defineType({
           name: "status",
           title: "Status",
           type: "string",
-          options: { list: ["On-going", "Completed", "Maintenance"] },
+          options: { list: ["On-going", "Completed", "Maintenance", "Active Development"], layout: "dropdown" },
         }),
-        defineField({ name: "environment", title: "Environment Platform", type: "string" }),
+        defineField({
+          name: "environment",
+          title: "Environment Platform",
+          type: "string",
+          options: { list: ["Production", "Local", "Archived"], layout: "dropdown" },
+        }),
         defineField({ name: "role", title: "Role", type: "string" }),
         defineField({ name: "repoUrl", title: "Source Repository Link", type: "string" }),
         defineField({ name: "liveUrl", title: "Production Live URL", type: "string" }),
