@@ -24,9 +24,9 @@ export function ProjectsList({ initialProjects }: ProjectsListProps) {
   });
 
   return (
-    <div className="container mx-auto max-w-5xl py-10 px-4 space-y-4 md:space-y-10 min-h-screen font-sans">
+    <div className="container mx-auto max-w-5xl py-10 px-4 space-y-4 md:space-y-10 font-sans">
       <header className="pt-20 flex flex-col items-center text-center gap-4">
-        <h1 className="text-3xl font-mono tracking-tight font-bold uppercase">Projects & Works</h1>
+        <h1 className="text-5xl font-mono tracking-tight font-bold">Projects & Works</h1>
         <p className="text-muted-foreground text-sm font-mono max-w-xl">
           Index of documented works, interesting projects, and systemic sanity tests.
         </p>

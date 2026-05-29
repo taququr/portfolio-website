@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 
 export function Navbar() {
   const pathname = usePathname();
-  const isStudioPage = pathname?.startsWith("/studio/");
+  const isStudioPage = pathname === "/studio" || pathname?.startsWith("/studio/");
   const { theme, setTheme } = useTheme();
 
   const navItems = [

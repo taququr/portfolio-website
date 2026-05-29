@@ -5,12 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import {
-  Field,
-  FieldGroup,
-  FieldLabel,
-  FieldError,
-} from "@/components/ui/field";
+import { Field, FieldGroup, FieldLabel, FieldError } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { sendEmail } from "@/lib/send-email";
@@ -49,26 +44,23 @@ function AboutPage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto pt-32 pb-24 px-6 font-sans">
-      <h1 className="text-4xl font-bold tracking-tight mb-12">
-        About & Philosophy
-      </h1>
+    <div className="container mx-auto max-w-5xl py-10 px-4 space-y-4 md:space-y-10 font-sans">
+      <header className="pt-20 pb-12 flex flex-col items-center text-center gap-4">
+        <h1 className="text-5xl font-bold tracking-tight">About & Philosophy</h1>
+      </header>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
         <div className="md:col-span-2 flex flex-col gap-6 text-muted-foreground leading-relaxed">
           <p>
-            I am a frontend-focused developer specializing in building reliable,
-            type-safe, and highly performant web architectures. My approach to
-            programming is grounded in predictability and robustness—ensuring
-            smooth, error-free, and reliable user experiences.
+            I am a frontend-focused developer specializing in building reliable, type-safe, and highly performant web
+            architectures. My approach to programming is grounded in predictability and robustness—ensuring smooth,
+            error-free, and reliable user experiences.
           </p>
           <p>
-            While my primary focus centers on frontend systems, my capabilities
-            extend deeper into the architecture. I am experienced in
-            establishing backend foundations and working directly with databases
-            like PostgreSQL, alongside integrating modern headless CMS platforms
-            like Strapi and Sanity to ensure dynamic, decoupled content
-            delivery.
+            While my primary focus centers on frontend systems, my capabilities extend deeper into the architecture. I
+            am experienced in establishing backend foundations and working directly with databases like PostgreSQL,
+            alongside integrating modern headless CMS platforms like Strapi and Sanity to ensure dynamic, decoupled
+            content delivery.
           </p>
         </div>
 
@@ -81,23 +73,15 @@ function AboutPage() {
           <CardContent className="text-xs font-mono space-y-4">
             <div>
               <div className="font-semibold text-foreground">Core Engine:</div>
-              <div className="text-muted-foreground">
-                Next.js 16 (App Router) • React 19 / SvelteKit • Svelte 5
-              </div>
+              <div className="text-muted-foreground">Next.js 16 (App Router) • React 19 / SvelteKit • Svelte 5</div>
             </div>
             <div>
               <div className="font-semibold text-foreground">Styling:</div>
-              <div className="text-muted-foreground">
-                Tailwind CSS v4 • shadcn/ui • Flowbite
-              </div>
+              <div className="text-muted-foreground">Tailwind CSS v4 • shadcn/ui • Flowbite</div>
             </div>
             <div>
-              <div className="font-semibold text-foreground">
-                Database & CMS:
-              </div>
-              <div className="text-muted-foreground">
-                PostgreSQL • Strapi • Sanity
-              </div>
+              <div className="font-semibold text-foreground">Database & CMS:</div>
+              <div className="text-muted-foreground">PostgreSQL • Strapi • Sanity</div>
             </div>
             {/* <div>
               <div className="font-semibold text-foreground">
@@ -113,12 +97,9 @@ function AboutPage() {
 
       <section className="border-t border-border pt-12">
         <div className="max-w-xl">
-          <h2 className="text-2xl font-bold tracking-tight mb-2">
-            Get in Touch
-          </h2>
+          <h2 className="text-2xl font-bold tracking-tight mb-2">Get in Touch</h2>
           <p className="text-sm text-muted-foreground mb-6">
-            Have an application design, collaboration opportunity, or contract
-            position? Drop a secure message below.
+            Have an application design, collaboration opportunity, or contract position? Drop a secure message below.
           </p>
 
           <form id="contact-form" onSubmit={form.handleSubmit(onSubmit)}>
@@ -127,19 +108,10 @@ function AboutPage() {
                 name="name"
                 control={form.control}
                 render={({ field, fieldState }) => (
-                  <Field
-                    data-invalid={fieldState.invalid}
-                    className="col-span-1"
-                  >
+                  <Field data-invalid={fieldState.invalid} className="col-span-1">
                     <FieldLabel htmlFor="name">Name</FieldLabel>
-                    <Input
-                      id="name"
-                      {...field}
-                      aria-invalid={fieldState.invalid}
-                    />
-                    {fieldState.invalid && (
-                      <FieldError errors={[fieldState.error]} />
-                    )}
+                    <Input id="name" {...field} aria-invalid={fieldState.invalid} />
+                    {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
                   </Field>
                 )}
               />
@@ -147,19 +119,10 @@ function AboutPage() {
                 name="email"
                 control={form.control}
                 render={({ field, fieldState }) => (
-                  <Field
-                    data-invalid={fieldState.invalid}
-                    className="col-span-1"
-                  >
+                  <Field data-invalid={fieldState.invalid} className="col-span-1">
                     <FieldLabel htmlFor="email">Email</FieldLabel>
-                    <Input
-                      id="email"
-                      {...field}
-                      aria-invalid={fieldState.invalid}
-                    />
-                    {fieldState.invalid && (
-                      <FieldError errors={[fieldState.error]} />
-                    )}
+                    <Input id="email" {...field} aria-invalid={fieldState.invalid} />
+                    {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
                   </Field>
                 )}
               />
@@ -167,10 +130,7 @@ function AboutPage() {
                 name="message"
                 control={form.control}
                 render={({ field, fieldState }) => (
-                  <Field
-                    data-invalid={fieldState.invalid}
-                    className="col-span-2"
-                  >
+                  <Field data-invalid={fieldState.invalid} className="col-span-2">
                     <FieldLabel htmlFor="message">Message</FieldLabel>
                     <Textarea
                       id="message"
@@ -178,9 +138,7 @@ function AboutPage() {
                       aria-invalid={fieldState.invalid}
                       className="h-32 resize-none overflow-y-auto"
                     />
-                    {fieldState.invalid && (
-                      <FieldError errors={[fieldState.error]} />
-                    )}
+                    {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
                   </Field>
                 )}
               />

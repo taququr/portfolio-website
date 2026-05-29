@@ -16,7 +16,7 @@ export default async function Home() {
   const projects = response.data as Project[];
 
   return (
-    <div className="max-w-5xl mx-auto p-8 font-sans">
+    <div className="container mx-auto max-w-5xl py-10 px-4 space-y-4 md:space-y-10 font-sans">
       {/* HERO SECTION */}
       <header className="pt-20 pb-12 flex flex-col items-center text-center gap-4">
         <h1 className="text-5xl font-bold tracking-tight">Taqie Fadlillah</h1>

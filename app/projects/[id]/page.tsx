@@ -57,26 +57,29 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
   if (!project) notFound();
 
   return (
-    <main className="min-h-screen font-mono text-foreground antialiased selection:bg-primary/20 transition-colors duration-75">
+    <main className="font-mono text-foreground antialiased selection:bg-primary/20 transition-colors duration-75">
       <header className="w-full border-b border-muted-foreground/10 xl:h-[calc(100vh-4rem)] flex flex-col justify-between p-4 md:p-8 lg:p-12 mt-20 md:mt-4 gap-8">
         {/* TOP META SYSTEM ROW */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-muted-foreground/5 pb-4">
           <Link
             href="/projects"
-            className="hidden md:flex text-xs text-muted-foreground hover:text-foreground transition-colors tracking-wider uppercase items-center gap-2 group"
+            className="hidden md:flex text-xs text-muted-foreground hover:text-sky-400 dark:hover:text-sky-500 transition-colors tracking-wider uppercase items-center gap-2 group"
           >
             <span className="group-hover:-translate-x-1 transition-transform duration-200">&larr;</span> RETURN TO
             PROJECT LIST
           </Link>
-          <div className="text-center text-[10px] text-muted-foreground tracking-widest uppercase">
-            PROJECT_ID: {project.id}{" "}
-            {project.dateUpdated && project.dateCreated
-              ? project.dateUpdated > project.dateCreated
-                ? "// DATE_UPDATED: " + project.dateUpdated
-                : "// DATE_CREATED: " + project.dateCreated
-              : project.dateCreated
-                ? "// DATE_CREATED: " + project.dateCreated
-                : ""}
+          <div className="flex flex-col md:flex-row md:items-center justify-center gap-2 text-center text-[10px] text-muted-foreground tracking-widest uppercase">
+            <span>PROJECT_ID: {project.id} </span>
+            <span className="hidden md:block">//</span>
+            <span>
+              {project.dateUpdated && project.dateCreated
+                ? project.dateUpdated > project.dateCreated
+                  ? "DATE_UPDATED: " + project.dateUpdated
+                  : "DATE_CREATED: " + project.dateCreated
+                : project.dateCreated
+                  ? "DATE_CREATED: " + project.dateCreated
+                  : ""}
+            </span>
           </div>
         </div>
 
