@@ -13,13 +13,20 @@ import { formatDate } from "@/lib/utils";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 
-export function ProjectsList({ initialProjects }: { initialProjects: Project[] }) {
+interface ProjectsListProps {
+  projects: Project[];
+}
+
+export function ProjectsList({ projects }: ProjectsListProps) {
   const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredProjects = initialProjects.filter((project: Project) => {
-    const matchesTitle = project.title?.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesDesc = project.shortDescription?.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesTags = project.tags?.some((tag: string) => tag.toLowerCase().includes(searchQuery.toLowerCase()));
+  const filteredProjects = projects.filter((project) => {
+    const searchLower = searchQuery.toLowerCase();
+
+    const matchesTitle = project.title?.toLowerCase().includes(searchLower);
+    const matchesDesc = project.shortDescription?.toLowerCase().includes(searchLower);
+    const matchesTags = project.tags?.some((tag) => tag.toLowerCase().includes(searchLower));
+
     return matchesTitle || matchesDesc || matchesTags;
   });
 

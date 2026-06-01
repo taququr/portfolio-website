@@ -10,6 +10,7 @@ import { sanityFetch } from "@/sanity/lib/live";
 import type { Project } from "@/sanity.types";
 
 import { formatDate } from "@/lib/utils";
+import { singleProjectQuery } from "@/lib/queries";
 import { getMetricTextColor } from "@/lib/text-color";
 
 import { Badge } from "@/components/ui/badge";
@@ -32,35 +33,8 @@ export async function generateStaticParams() {
 export default async function ProjectDetailPage({ params }: ProjectPageProps) {
   const { slug } = await params;
 
-  const query = `*[_type == "project" && slug.current == $slug][0]{
-    _id,
-    _createdAt,
-    _updatedAt,
-    title,
-    slug,
-    shortDescription,
-    tags,
-    heroImage,
-    dateCreated,
-    dateUpdated,
-    metrics {
-      status,
-      environment,
-      role,
-      repoUrl,
-      liveUrl
-    },
-    blogNarrative[] {
-      type,
-      heading,
-      text,
-      imageUrl,
-      imageAlt
-    }
-  }`;
-
   const response = await sanityFetch({
-    query,
+    query: singleProjectQuery,
     params: { slug },
   });
 
@@ -71,7 +45,6 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
   return (
     <main className="font-mono text-foreground antialiased selection:bg-primary/20 transition-colors duration-75">
       <header className="w-full border-b border-muted-foreground/10 xl:h-[calc(100vh-4rem)] flex flex-col justify-between p-4 md:p-8 lg:p-12 mt-20 md:mt-4 gap-8">
-        {/* TOP META SYSTEM ROW */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-muted-foreground/5 pb-4">
           <Link
             href="/projects"
@@ -139,7 +112,6 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
           {project.blogNarrative &&
             project.blogNarrative.map((block: any, idx: number) => {
               switch (block.type) {
-                // 1. Sleek Text Blocks (handles headings + raw analysis flawlessly)
                 case "text-only":
                   return (
                     <div key={idx} className="space-y-4 max-w-3xl">
@@ -156,7 +128,6 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                     </div>
                   );
 
-                // 2. Wide Architecture Layout Panels
                 case "full-width-media":
                   return (
                     <div key={idx} className="space-y-4">
@@ -182,7 +153,6 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                     </div>
                   );
 
-                // 3. Mixed Grid Configurations (gracefully defaults to stacked on mobile screens)
                 case "split-right":
                 case "split-left":
                   const isImgLeft = block.type === "split-left";

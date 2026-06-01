@@ -2,27 +2,24 @@ export const dynamic = "force-dynamic";
 
 import Link from "next/link";
 import { sanityFetch } from "@/sanity/lib/live";
+import { notFound } from "next/navigation";
 
 import type { Project } from "@/sanity.types";
+
+import { allProjectsQuery } from "@/lib/queries";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default async function Home() {
-  const query = `*[_type == "project"] | order(_createdAt desc){ 
-    _id, 
-    title, 
-    shortDescription, 
-    tags,
-    slug
-  }`;
-
   const response = await sanityFetch({
-    query,
+    query: allProjectsQuery,
   });
 
-  const projects = response.data as Project[];
+  const projects = response.data as Project[] | null;
+
+  if (!projects) return notFound();
 
   return (
     <div className="container mx-auto max-w-5xl py-10 px-4 space-y-4 md:space-y-10 font-sans">

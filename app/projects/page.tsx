@@ -1,29 +1,22 @@
 export const dynamic = "force-dynamic";
 
 import { sanityFetch } from "@/sanity/lib/live";
+import { notFound } from "next/navigation";
 
 import type { Project } from "@/sanity.types";
+
+import { allProjectsQuery } from "@/lib/queries";
 
 import { ProjectsList } from "@/components/projects/projects-list";
 
 export default async function ProjectsPage() {
-  const query = `*[_type == "project"] | order(dateUpdated desc) {
-    _id,
-    _createdAt,
-    _updatedAt,
-    title,
-    slug,
-    shortDescription, 
-    tags,
-    heroImage
-  }`;
-
-  const projects = await sanityFetch({
-    query,
+  const response = await sanityFetch({
+    query: allProjectsQuery,
   });
 
-  const initialProjects = projects.data as Project[];
+  const projects = response.data as Project[] | null;
 
-  // 2. Hand the data off cleanly to the interactive client container wrapper
-  return <ProjectsList initialProjects={initialProjects} />;
+  if (!projects) return notFound();
+
+  return <ProjectsList projects={projects} />;
 }
