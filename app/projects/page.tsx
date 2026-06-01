@@ -1,18 +1,21 @@
 export const dynamic = "force-dynamic";
 
-import { ProjectsList } from "@/components/projects/projects-list";
-import { Project } from "@/sanity.types";
 import { sanityFetch } from "@/sanity/lib/live";
+
+import type { Project } from "@/sanity.types";
+
+import { ProjectsList } from "@/components/projects/projects-list";
 
 export default async function ProjectsPage() {
   const query = `*[_type == "project"] | order(dateUpdated desc) {
-    id, 
-    title, 
+    _id,
+    _createdAt,
+    _updatedAt,
+    title,
+    slug,
     shortDescription, 
     tags,
-    heroImage,
-    dateCreated,
-    dateUpdated
+    heroImage
   }`;
 
   const projects = await sanityFetch({

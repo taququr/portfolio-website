@@ -1,38 +1,48 @@
 export const dynamic = "force-dynamic";
 
-import { notFound } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
-import { client } from "@/sanity/lib/client";
+import { notFound } from "next/navigation";
 import { urlFor } from "@/sanity/lib/image";
+import { client } from "@/sanity/lib/client";
 import { sanityFetch } from "@/sanity/lib/live";
-import { Badge } from "@/components/ui/badge";
+
+import type { Project } from "@/sanity.types";
+
+import { formatDate } from "@/lib/utils";
 import { getMetricTextColor } from "@/lib/text-color";
-import { Project } from "@/sanity.types";
+
+import { Badge } from "@/components/ui/badge";
 
 interface ProjectPageProps {
-  params: Promise<{ id: string }>;
+  params: Promise<{ slug: string }>;
 }
 
 export async function generateStaticParams() {
-  const query = `*[_type == "project"]{ id }`;
-  const projects = await client.fetch<{ id: string }[]>(query);
+  const query = `*[_type == "project" && defined(slug.current)]{ "slug": slug.current }`;
+  const projects = await client.fetch<{ slug: string }[]>(query);
+
+  if (!projects) return [];
 
   return projects.map((project) => ({
-    id: project.id,
+    slug: project.slug,
   }));
 }
 
 export default async function ProjectDetailPage({ params }: ProjectPageProps) {
-  const { id } = await params;
+  const { slug } = await params;
 
-  const query = `*[_type == "project" && id == $id][0]{
-    id,
+  const query = `*[_type == "project" && slug.current == $slug][0]{
+    _id,
+    _createdAt,
+    _updatedAt,
     title,
+    slug,
     shortDescription,
     tags,
     heroImage,
     dateCreated,
+    dateUpdated,
     metrics {
       status,
       environment,
@@ -51,7 +61,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
   const response = await sanityFetch({
     query,
-    params: { id },
+    params: { slug },
   });
 
   const project = response.data as Project | null;
@@ -71,23 +81,21 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             PROJECT LIST
           </Link>
           <div className="flex flex-col md:flex-row md:items-center justify-center gap-2 text-center text-[10px] text-muted-foreground tracking-widest uppercase">
-            <span>PROJECT_ID: {project.id} </span>
+            <span>PROJECT_ID: {project.slug?.current} </span>
             <span className="hidden md:block">//</span>
             <span>
-              {project.dateUpdated && project.dateCreated
-                ? project.dateUpdated > project.dateCreated
-                  ? "DATE_UPDATED: " + project.dateUpdated
-                  : "DATE_CREATED: " + project.dateCreated
-                : project.dateCreated
-                  ? "DATE_CREATED: " + project.dateCreated
+              {project._updatedAt && project._createdAt
+                ? new Date(project._updatedAt) > new Date(project._createdAt)
+                  ? "DATE_UPDATED: " + formatDate(project._updatedAt)
+                  : "DATE_CREATED: " + formatDate(project._createdAt)
+                : project._createdAt
+                  ? "DATE_CREATED: " + formatDate(project._createdAt)
                   : ""}
             </span>
           </div>
         </div>
 
-        {/* MAIN SPLIT GRID HERO */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center my-auto w-full max-w-7xl mx-auto">
-          {/* LEFT: Metadata Core Context */}
           <div className="lg:col-span-5 space-y-6">
             <h1 className="text-3xl md:text-4xl xl:text-5xl font-bold tracking-tight uppercase leading-none wrap-break">
               {project.title}
@@ -102,7 +110,6 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
             </div>
           </div>
 
-          {/* RIGHT: High-Impact Visual Screen Lock */}
           <div className="lg:col-span-7 relative w-full aspect-video rounded-lg overflow-hidden border border-muted-foreground/10 bg-muted/5 shadow-2xl shadow-black/40">
             {project.heroImage ? (
               <Image
@@ -110,8 +117,8 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                 alt={`${project.title} master environment execution`}
                 fill
                 priority
-                className="object-cover object-center grayscale contrast-[1.05] brightness-[0.85] dark:brightness-[0.7]"
-                sizes="(max-width: 1024px) 100vw, 750px"
+                className="object-cover object-center transition-all duration-500 ease-in-out filter grayscale hover:grayscale-0 contrast-[1.1] brightness-[0.9] dark:brightness-[0.4] hover:brightness-[0.8] hover:contrast-100"
+                sizes="(max-width: 1024px) 100vw"
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center bg-muted/5">

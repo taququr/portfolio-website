@@ -28,8 +28,8 @@ export type Project = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
-  id?: string;
   title?: string;
+  slug?: Slug;
   shortDescription?: string;
   tags?: Array<string>;
   heroImage?: {
@@ -39,8 +39,6 @@ export type Project = {
     crop?: SanityImageCrop;
     _type: "image";
   };
-  dateCreated?: string;
-  dateUpdated?: string;
   metrics?: {
     status?: "On-going" | "Completed" | "Maintenance" | "Active Development";
     environment?: "Production" | "Local" | "Archived";
@@ -79,6 +77,12 @@ export type SanityImageHotspot = {
   y?: number;
   height?: number;
   width?: number;
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
 };
 
 export type SanityImagePaletteSwatch = {
@@ -178,17 +182,12 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
-};
-
 export type AllSanitySchemaTypes =
   | SanityImageAssetReference
   | Project
   | SanityImageCrop
   | SanityImageHotspot
+  | Slug
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
@@ -196,5 +195,4 @@ export type AllSanitySchemaTypes =
   | SanityFileAsset
   | SanityAssetSourceData
   | SanityImageAsset
-  | Geopoint
-  | Slug;
+  | Geopoint;

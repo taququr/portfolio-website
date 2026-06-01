@@ -4,19 +4,19 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { urlFor } from "@/sanity/lib/image";
+
+import type { Project } from "@/sanity.types";
+
+import { formatDate } from "@/lib/utils";
 
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { urlFor } from "@/sanity/lib/image";
 
-interface ProjectsListProps {
-  initialProjects: any[];
-}
-
-export function ProjectsList({ initialProjects }: ProjectsListProps) {
+export function ProjectsList({ initialProjects }: { initialProjects: Project[] }) {
   const [searchQuery, setSearchQuery] = useState("");
 
-  const filteredProjects = initialProjects.filter((project: any) => {
+  const filteredProjects = initialProjects.filter((project: Project) => {
     const matchesTitle = project.title?.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesDesc = project.shortDescription?.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesTags = project.tags?.some((tag: string) => tag.toLowerCase().includes(searchQuery.toLowerCase()));
@@ -44,12 +44,12 @@ export function ProjectsList({ initialProjects }: ProjectsListProps) {
       <motion.div layout className="space-y-8 pt-4">
         <AnimatePresence mode="popLayout">
           {filteredProjects.length > 0 ? (
-            filteredProjects.map((project: any, index: number) => {
+            filteredProjects.map((project: Project, index: number) => {
               const isEven = index % 2 === 0;
 
               return (
                 <motion.div
-                  key={project.id}
+                  key={project._id}
                   layout
                   initial={{ opacity: 0, y: 12 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -62,7 +62,7 @@ export function ProjectsList({ initialProjects }: ProjectsListProps) {
                   }}
                 >
                   <Link
-                    href={`/projects/${project.id}`}
+                    href={`/projects/${project.slug?.current}`}
                     className="group block relative w-full overflow-hidden border border-muted-foreground/10 hover:border-foreground/30 transition-colors duration-300 rounded-lg bg-card"
                   >
                     <div className="flex flex-col min-h-60 md:h-52 relative w-full">
@@ -76,7 +76,7 @@ export function ProjectsList({ initialProjects }: ProjectsListProps) {
                           }`}
                         >
                           <span className="text-xs font-mono dark:text-muted-foreground tracking-wider">
-                            {project.dateCreated}
+                            {formatDate(project._createdAt)}
                           </span>
                           <h2 className="text-lg font-mono font-bold group-hover:text-primary">{project.title}</h2>
                           <p className="text-xs font-mono dark:text-muted-foreground leading-relaxed line-clamp-2">
@@ -103,15 +103,15 @@ export function ProjectsList({ initialProjects }: ProjectsListProps) {
 
                       <div className="absolute inset-0 w-full h-full z-10 select-none pointer-events-none">
                         <div
-                          className={`absolute top-0 bottom-0 w-full md:w-[45%] h-full transition-all duration-700 ease-in-out filter grayscale group-hover:grayscale-0
-                            contrast-[1.1] brightness-[0.9] dark:brightness-[0.4] md:dark:brightness-[0.5] md:group-hover:brightness-[0.8] ${
+                          className={`absolute top-0 bottom-0 w-full md:w-[45%] h-full transition-all duration-500 ease-in-out filter grayscale group-hover:grayscale-0
+                            contrast-[1.1] brightness-[0.9] dark:brightness-[0.4] group-hover:brightness-[0.8] group-hover:contrast-100 ${
                               isEven ? "right-0" : "left-0"
                             }`}
                         >
                           {project.heroImage ? (
                             <Image
                               src={urlFor(project.heroImage).url()}
-                              alt={project.title}
+                              alt={project.title || "Project image " + index}
                               fill
                               className="object-cover object-center"
                               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

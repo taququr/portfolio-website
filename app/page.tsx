@@ -1,15 +1,22 @@
 export const dynamic = "force-dynamic";
 
 import Link from "next/link";
-import { Project } from "@/sanity.types";
 import { sanityFetch } from "@/sanity/lib/live";
+
+import type { Project } from "@/sanity.types";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default async function Home() {
-  const query = `*[_type == "project"]{ id, title, shortDescription, tags }`;
+  const query = `*[_type == "project"] | order(_createdAt desc){ 
+    _id, 
+    title, 
+    shortDescription, 
+    tags,
+    slug
+  }`;
 
   const response = await sanityFetch({
     query,
@@ -19,7 +26,6 @@ export default async function Home() {
 
   return (
     <div className="container mx-auto max-w-5xl py-10 px-4 space-y-4 md:space-y-10 font-sans">
-      {/* HERO SECTION */}
       <header className="pt-20 pb-12 flex flex-col items-center text-center gap-4">
         <h1 className="text-5xl font-bold tracking-tight">Taqie Fadlillah</h1>
         <p className="text-xl text-muted-foreground max-w-[600px]">
@@ -27,16 +33,15 @@ export default async function Home() {
         </p>
       </header>
 
-      {/* PROJECTS GRID */}
       <h3 className="text-2xl font-bold mb-4">Work & Projects</h3>
       <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {projects.length > 0 ? (
           projects.slice(0, 4).map((project: any) => (
             <Card
-              key={project.id}
+              key={project._id}
               className="md:col-span-1 col-span-2 border border-muted-foreground/10 hover:border-foreground/30 duration-500"
             >
-              <Link href={`/projects/${project.id}`}>
+              <Link href={`/projects/${project.slug?.current}`}>
                 <CardHeader>
                   <div className="flex flex-wrap gap-2 pb-2">
                     {project.tags.map((tag: string, index: number) => (

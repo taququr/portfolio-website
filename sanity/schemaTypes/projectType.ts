@@ -5,18 +5,28 @@ export const projectType = defineType({
   title: "Project List",
   type: "document",
   fields: [
-    defineField({
-      name: "id",
-      title: "Project URL Slug ID",
-      type: "string",
-      validation: (Rule) => Rule.required().error("An internal tracking URL ID slug is mandatory."),
-    }),
+    // defineField({
+    //   name: "id",
+    //   title: "Project URL Slug ID",
+    //   type: "string",
+    //   validation: (Rule) => Rule.required().error("An internal tracking URL ID slug is mandatory."),
+    // }),
     defineField({
       name: "title",
       title: "Project Title",
       type: "string",
       validation: (Rule) =>
         Rule.required().min(1).max(100).error("A project heading title is required and below 100 characters."),
+    }),
+    defineField({
+      name: "slug",
+      title: "URL Slug",
+      type: "slug",
+      options: {
+        source: "title",
+        maxLength: 96,
+      },
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "shortDescription",
@@ -39,24 +49,24 @@ export const projectType = defineType({
       options: { hotspot: true },
       validation: (Rule) => Rule.required().error("A hero image is required."),
     }),
-    defineField({
-      name: "dateCreated",
-      title: "Deployment Date",
-      type: "date",
-      options: {
-        dateFormat: "YYYY-MM-DD",
-      },
-      validation: (Rule) => Rule.required().error("A deployment date is required."),
-    }),
-    defineField({
-      name: "dateUpdated",
-      title: "Last Updated Date",
-      type: "date",
-      options: {
-        dateFormat: "YYYY-MM-DD",
-      },
-      validation: (Rule) => Rule.required().error("A last updated date is required."),
-    }),
+    // defineField({
+    //   name: "dateCreated",
+    //   title: "Deployment Date",
+    //   type: "date",
+    //   options: {
+    //     dateFormat: "YYYY-MM-DD",
+    //   },
+    //   validation: (Rule) => Rule.required().error("A deployment date is required."),
+    // }),
+    // defineField({
+    //   name: "dateUpdated",
+    //   title: "Last Updated Date",
+    //   type: "date",
+    //   options: {
+    //     dateFormat: "YYYY-MM-DD",
+    //   },
+    //   validation: (Rule) => Rule.required().error("A last updated date is required."),
+    // }),
 
     // EMBEDDED NESTED SYSTEM METRICS OBJECT
     defineField({
