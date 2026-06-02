@@ -16,8 +16,47 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Taququr",
+  title: "Taququr Portfolio",
   description: "Personal portfolio website",
+  keywords: ["Frontend Developer", "Next.js", "React", "TypeScript", "Tailwind CSS", "Sanity CMS"],
+  authors: [{ name: "Taququr" }],
+  creator: "Taququr",
+  metadataBase: new URL("https://taququr.com"),
+  openGraph: {
+    title: "Taququr | Creative Frontend Developer Portfolio",
+    description:
+      "Explore interactive projects, engineering narratives, and cutting-edge web applications built with Next.js and Sanity.",
+    url: "https://taququr.com",
+    siteName: "Taququr Portfolio",
+    images: [
+      {
+        url: "/og-image.webp",
+        width: 1200,
+        height: 630,
+        alt: "Taququr Portfolio Preview Image",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  // twitter: {
+  //   card: "summary_large_image",
+  //   title: "Taququr | Software Engineer Portfolio",
+  //   description: "Personal portfolio website showcasing engineering narratives and web software solutions.",
+  //   images: ["/og-image.png"], // Reuses the same card asset
+  //   creator: "@your_twitter_handle", // Optional
+  // },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 
 export default function RootLayout({
