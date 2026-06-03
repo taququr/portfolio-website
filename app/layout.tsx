@@ -83,7 +83,7 @@ export default function RootLayout({
           <Navbar />
           {children}
           <Toaster />
-          <SanityLive />
+          <SanityLive onWelcome={false} />
           <Footer />
         </ThemeProvider>
       </body>

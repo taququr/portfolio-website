@@ -5,12 +5,6 @@ export const projectType = defineType({
   title: "Project List",
   type: "document",
   fields: [
-    // defineField({
-    //   name: "id",
-    //   title: "Project URL Slug ID",
-    //   type: "string",
-    //   validation: (Rule) => Rule.required().error("An internal tracking URL ID slug is mandatory."),
-    // }),
     defineField({
       name: "title",
       title: "Project Title",
@@ -49,26 +43,6 @@ export const projectType = defineType({
       options: { hotspot: true },
       validation: (Rule) => Rule.required().error("A hero image is required."),
     }),
-    // defineField({
-    //   name: "dateCreated",
-    //   title: "Deployment Date",
-    //   type: "date",
-    //   options: {
-    //     dateFormat: "YYYY-MM-DD",
-    //   },
-    //   validation: (Rule) => Rule.required().error("A deployment date is required."),
-    // }),
-    // defineField({
-    //   name: "dateUpdated",
-    //   title: "Last Updated Date",
-    //   type: "date",
-    //   options: {
-    //     dateFormat: "YYYY-MM-DD",
-    //   },
-    //   validation: (Rule) => Rule.required().error("A last updated date is required."),
-    // }),
-
-    // EMBEDDED NESTED SYSTEM METRICS OBJECT
     defineField({
       name: "metrics",
       title: "Deployment Metrics",
@@ -91,8 +65,6 @@ export const projectType = defineType({
         defineField({ name: "liveUrl", title: "Production Live URL", type: "string" }),
       ],
     }),
-
-    // THE FLEXIBLE BLOG NARRATIVE CONFIGURABLE CONTENT ENGINE ARRAY
     defineField({
       name: "blogNarrative",
       title: "Project Log Narrative Blocks",

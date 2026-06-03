@@ -48,7 +48,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-muted-foreground/5 pb-4">
           <Link
             href="/projects"
-            className="hidden md:flex text-xs text-muted-foreground hover:text-sky-400 dark:hover:text-sky-500 transition-colors tracking-wider uppercase items-center gap-2 group"
+            className="hidden md:flex text-xs text-muted-foreground hover:text-sky-600 dark:hover:text-sky-400 transition-colors tracking-wider uppercase items-center gap-2 group"
           >
             <span className="group-hover:-translate-x-1 transition-transform duration-200">&larr;</span> RETURN TO
             PROJECT LIST

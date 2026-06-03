@@ -25,7 +25,7 @@ export default async function Home() {
     <div className="container mx-auto max-w-5xl py-10 px-4 space-y-4 md:space-y-10 font-sans">
       <header className="pt-20 pb-12 flex flex-col items-center text-center gap-4">
         <h1 className="text-5xl font-bold tracking-tight">Taqie Fadlillah</h1>
-        <p className="text-xl text-muted-foreground max-w-[600px]">
+        <p className="text-xl text-muted-foreground max-w-xl">
           A frontend developer passionate about building responsive and performance-optimized web applications.
         </p>
       </header>
@@ -36,7 +36,7 @@ export default async function Home() {
           projects.slice(0, 4).map((project: any) => (
             <Card
               key={project._id}
-              className="md:col-span-1 col-span-2 border border-muted-foreground/10 hover:border-foreground/30 duration-500"
+              className="md:col-span-1 col-span-2 border border-muted-foreground/10 hover:border-foreground/30"
             >
               <Link href={`/projects/${project.slug?.current}`}>
                 <CardHeader>
@@ -51,11 +51,11 @@ export default async function Home() {
                       </Badge>
                     ))}
                   </div>
-                  <CardTitle className="text-primary duration-75">{project.title}</CardTitle>
+                  <CardTitle>{project.title}</CardTitle>
                   <CardDescription>{project.shortDescription}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <Button variant="link" className="p-0 text-sky-400 dark:text-sky-500">
+                  <Button variant="link" className="p-0 text-sky-600 dark:text-sky-400">
                     Learn more &rarr;
                   </Button>
                 </CardContent>
@@ -65,14 +65,14 @@ export default async function Home() {
         ) : (
           <p>No projects found</p>
         )}
-        <Card className="col-span-2 border border-muted-foreground/10 hover:border-foreground/30 duration-500">
+        <Card className="col-span-2 border border-muted-foreground/10 hover:border-foreground/30">
           <Link href="/projects">
             <CardHeader>
-              <CardTitle className="text-primary duration-75">More Projects</CardTitle>
+              <CardTitle>More Projects</CardTitle>
               <CardDescription>Check out my other projects</CardDescription>
             </CardHeader>
             <CardContent>
-              <Button variant="link" className="p-0 text-sky-400 dark:text-sky-500">
+              <Button variant="link" className="p-0 text-sky-600 dark:text-sky-400">
                 View all projects &rarr;
               </Button>
             </CardContent>

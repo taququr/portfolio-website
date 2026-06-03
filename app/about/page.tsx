@@ -51,7 +51,7 @@ function AboutPage() {
         <h1 className="text-5xl font-bold tracking-tight">About & Philosophy</h1>
       </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
         <div className="md:col-span-2 flex flex-col gap-6 text-muted-foreground leading-relaxed">
           <p>
             I am a frontend-focused developer specializing in building reliable, type-safe, and highly performant web
@@ -68,7 +68,7 @@ function AboutPage() {
 
         <Card className="bg-muted/30 border-dashed">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-mono uppercase tracking-wider text-sky-400 dark:text-sky-500">
+            <CardTitle className="text-sm font-mono uppercase tracking-wider text-sky-600 dark:text-sky-400">
               System Stacks
             </CardTitle>
           </CardHeader>
@@ -95,7 +95,7 @@ function AboutPage() {
             </div> */}
           </CardContent>
         </Card>
-      </div>
+      </section>
 
       <section className="border-t border-border pt-12">
         <div className="max-w-xl">
