@@ -9,11 +9,19 @@ import { sanityFetch } from "@/sanity/lib/live";
 
 import type { Project } from "@/sanity.types";
 
-import { formatDate } from "@/lib/utils";
+import { formatDate, getImageDimensions } from "@/lib/utils";
 import { singleProjectQuery } from "@/lib/queries";
 import { getMetricTextColor } from "@/lib/text-color";
 
 import { Badge } from "@/components/ui/badge";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
@@ -111,6 +119,15 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
         <div className="lg:col-span-8 space-y-16">
           {project.blogNarrative &&
             project.blogNarrative.map((block: any, idx: number) => {
+              const renderParagraphs = (textString: string) => {
+                if (!textString) return null;
+                return textString.split(/\n\s*\n/).map((paragraph, pIdx) => (
+                  <p key={pIdx} className="text-xs text-muted-foreground leading-relaxed">
+                    {paragraph.trim()}
+                  </p>
+                ));
+              };
+
               switch (block.type) {
                 case "text-only":
                   return (
@@ -120,11 +137,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                           {block.heading}
                         </h2>
                       )}
-                      {block.text && (
-                        <p className="text-xs text-muted-foreground leading-relaxed whitespace-pre-line">
-                          {block.text}
-                        </p>
-                      )}
+                      {block.text && <div className="space-y-4">{renderParagraphs(block.text)}</div>}
                     </div>
                   );
 
@@ -136,19 +149,44 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                           {block.heading}
                         </h2>
                       )}
-                      {block.text && (
-                        <p className="text-xs text-muted-foreground leading-relaxed max-w-3xl mb-4">{block.text}</p>
-                      )}
+                      {block.text && <div className="space-y-4 max-w-3xl mb-4">{renderParagraphs(block.text)}</div>}
                       {block.imageUrl && (
-                        <div className="relative w-full aspect-video border border-muted-foreground/10 rounded-lg overflow-hidden bg-muted/5">
-                          <Image
-                            src={urlFor(block.imageUrl).url()}
-                            alt={block.imageAlt || ""}
-                            fill
-                            className="object-cover"
-                            sizes="(max-width: 1024px) 100vw, 800px"
-                          />
-                        </div>
+                        <Dialog>
+                          <DialogTrigger>
+                            <div className="relative w-full aspect-video border border-muted-foreground/10 rounded-lg overflow-hidden bg-muted/5">
+                              <Image
+                                src={urlFor(block.imageUrl).url()}
+                                alt={block.imageAlt || ""}
+                                fill
+                                className="object-cover"
+                                sizes="(max-width: 1024px) 100vw, 800px"
+                              />
+                            </div>
+                          </DialogTrigger>
+                          <DialogContent className="min-w-1/2">
+                            <DialogHeader className="hidden">
+                              <DialogTitle>{block.imageAlt}</DialogTitle>
+                              <DialogDescription>{block.imageAlt}</DialogDescription>
+                            </DialogHeader>
+                            {(() => {
+                              const { width, height } = getImageDimensions(block.imageUrl);
+
+                              return (
+                                <div className="flex items-center justify-center max-h-[80vh] w-full overflow-hidden rounded-md">
+                                  <Image
+                                    src={urlFor(block.imageUrl).url()}
+                                    alt={block.imageAlt || ""}
+                                    width={width}
+                                    height={height}
+                                    className="w-full h-auto max-h-[80vh] object-contain"
+                                    sizes="(max-width: 1200px) 90vw, 1200px"
+                                    quality={90}
+                                  />
+                                </div>
+                              );
+                            })()}
+                          </DialogContent>
+                        </Dialog>
                       )}
                     </div>
                   );
@@ -165,18 +203,45 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                       )}
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
                         <div className={`space-y-3 ${isImgLeft ? "md:order-last" : ""}`}>
-                          {block.text && <p className="text-xs text-muted-foreground leading-relaxed">{block.text}</p>}
+                          {block.text && renderParagraphs(block.text)}
                         </div>
                         {block.imageUrl && (
-                          <div className="relative w-full aspect-4/3 border border-muted-foreground/10 rounded-lg overflow-hidden bg-muted/5">
-                            <Image
-                              src={urlFor(block.imageUrl).url()}
-                              alt={block.imageAlt || ""}
-                              fill
-                              className="object-cover"
-                              sizes="(max-width: 768px) 100vw, 400px"
-                            />
-                          </div>
+                          <Dialog>
+                            <DialogTrigger>
+                              <div className="relative w-full aspect-4/3 border border-muted-foreground/10 rounded-lg overflow-hidden bg-muted/5">
+                                <Image
+                                  src={urlFor(block.imageUrl).url()}
+                                  alt={block.imageAlt || ""}
+                                  fill
+                                  className="object-cover"
+                                  sizes="(max-width: 768px) 100vw, 400px"
+                                />
+                              </div>
+                            </DialogTrigger>
+                            <DialogContent className="min-w-1/2">
+                              <DialogHeader className="hidden">
+                                <DialogTitle>{block.imageAlt}</DialogTitle>
+                                <DialogDescription>{block.imageAlt}</DialogDescription>
+                              </DialogHeader>
+                              {(() => {
+                                const { width, height } = getImageDimensions(block.imageUrl);
+
+                                return (
+                                  <div className="flex items-center justify-center max-h-[80vh] w-full overflow-hidden rounded-md">
+                                    <Image
+                                      src={urlFor(block.imageUrl).url()}
+                                      alt={block.imageAlt || ""}
+                                      width={width}
+                                      height={height}
+                                      className="w-full h-auto max-h-[80vh] object-contain"
+                                      sizes="(max-width: 1200px) 90vw, 1200px"
+                                      quality={90}
+                                    />
+                                  </div>
+                                );
+                              })()}
+                            </DialogContent>
+                          </Dialog>
                         )}
                       </div>
                     </div>
