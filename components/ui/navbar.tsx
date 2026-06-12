@@ -19,7 +19,7 @@ export function Navbar() {
 
   return (
     !isStudioPage && (
-      <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50 pointer-events-auto">
+      <div className="fixed top-6 left-1/2 -translate-x-1/2 z-50 pointer-events-auto font-mono">
         <nav className="flex items-center gap-2 px-4 py-2 rounded-xl border border-border bg-background/80 backdrop-blur-md shadow-sm hover:shadow-lg duration-500">
           {navItems.map((item) => {
             const isActive = pathname === item.href;

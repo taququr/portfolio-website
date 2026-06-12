@@ -141,7 +141,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                     </div>
                   );
 
-                case "full-width-media":
+                case "full-width":
                   return (
                     <div key={idx} className="space-y-4">
                       {block.heading && (
@@ -152,16 +152,14 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                       {block.text && <div className="space-y-4 max-w-3xl mb-4">{renderParagraphs(block.text)}</div>}
                       {block.imageUrl && (
                         <Dialog>
-                          <DialogTrigger>
-                            <div className="relative w-full aspect-video border border-muted-foreground/10 rounded-lg overflow-hidden bg-muted/5">
-                              <Image
-                                src={urlFor(block.imageUrl).url()}
-                                alt={block.imageAlt || ""}
-                                fill
-                                className="object-cover"
-                                sizes="(max-width: 1024px) 100vw, 800px"
-                              />
-                            </div>
+                          <DialogTrigger className="relative block w-full aspect-4/3 md:aspect-video border border-muted-foreground/10 rounded-lg overflow-hidden bg-muted/5 cursor-pointer">
+                            <Image
+                              src={urlFor(block.imageUrl).url()}
+                              alt={block.imageAlt || ""}
+                              fill
+                              className="object-cover"
+                              sizes="(max-width: 1920px) 100vw, 1920px"
+                            />
                           </DialogTrigger>
                           <DialogContent className="min-w-1/2">
                             <DialogHeader className="hidden">
@@ -179,8 +177,6 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                                     width={width}
                                     height={height}
                                     className="w-full h-auto max-h-[80vh] object-contain"
-                                    sizes="(max-width: 1200px) 90vw, 1200px"
-                                    quality={90}
                                   />
                                 </div>
                               );
@@ -207,16 +203,14 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                         </div>
                         {block.imageUrl && (
                           <Dialog>
-                            <DialogTrigger>
-                              <div className="relative w-full aspect-4/3 border border-muted-foreground/10 rounded-lg overflow-hidden bg-muted/5">
-                                <Image
-                                  src={urlFor(block.imageUrl).url()}
-                                  alt={block.imageAlt || ""}
-                                  fill
-                                  className="object-cover"
-                                  sizes="(max-width: 768px) 100vw, 400px"
-                                />
-                              </div>
+                            <DialogTrigger className="relative w-full aspect-4/3 border border-muted-foreground/10 rounded-lg overflow-hidden bg-muted/5 cursor-pointer">
+                              <Image
+                                src={urlFor(block.imageUrl).url()}
+                                alt={block.imageAlt || ""}
+                                fill
+                                className="object-cover"
+                                sizes="(max-width: 1920px) 100vw, 1920px"
+                              />
                             </DialogTrigger>
                             <DialogContent className="min-w-1/2">
                               <DialogHeader className="hidden">
@@ -234,8 +228,6 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                                       width={width}
                                       height={height}
                                       className="w-full h-auto max-h-[80vh] object-contain"
-                                      sizes="(max-width: 1200px) 90vw, 1200px"
-                                      quality={90}
                                     />
                                   </div>
                                 );
