@@ -33,7 +33,7 @@ export function Footer() {
           </a>
           <Link
             href="/studio"
-            className="text-muted-foreground/30 hover:text-emerald-500 transition-colors duration-300 tracking-widest hidden md:block"
+            className="text-muted-foreground/30 hover:text-sky-700 dark:hover:text-sky-400 transition-colors duration-300 tracking-widest hidden md:block"
           >
             [<span className="group-hover:text-foreground">SYS_ADMIN</span>]
           </Link>

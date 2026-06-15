@@ -35,7 +35,7 @@ export default defineConfig({
               <span>PORTFOLIO_CORE_OS</span>
               <a
                 href="/"
-                className="text-muted-foreground/30 hover:text-emerald-500 transition-colors duration-300 tracking-widest hidden md:block"
+                className="text-muted-foreground/30 hover:text-sky-700 dark:hover:text-sky-400 transition-colors duration-300 tracking-widest hidden md:block"
               >
                 &larr; EXIT_TO_MAIN_SITE
               </a>

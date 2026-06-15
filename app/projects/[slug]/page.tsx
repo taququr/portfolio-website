@@ -22,6 +22,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { Heading, Paragraph } from "@/components/ui/typography";
 
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
@@ -51,12 +52,12 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
   if (!project) notFound();
 
   return (
-    <main className="font-mono text-foreground antialiased selection:bg-primary/20 transition-colors duration-75">
+    <main className="text-foreground antialiased selection:bg-primary/20 transition-colors duration-75 font-sans">
       <header className="w-full border-b border-muted-foreground/10 xl:h-[calc(100vh-4rem)] flex flex-col justify-between p-4 md:p-8 lg:p-12 mt-20 md:mt-4 gap-8">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-muted-foreground/5 pb-4">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-muted-foreground/5 pb-4 font-mono">
           <Link
             href="/projects"
-            className="hidden md:flex text-xs text-muted-foreground hover:text-sky-600 dark:hover:text-sky-400 transition-colors tracking-wider uppercase items-center gap-2 group"
+            className="hidden md:flex text-xs text-muted-foreground hover:text-sky-700 dark:hover:text-sky-400 transition-colors tracking-wider uppercase items-center gap-2 group"
           >
             <span className="group-hover:-translate-x-1 transition-transform duration-200">&larr;</span> RETURN TO
             PROJECT LIST
@@ -78,10 +79,10 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center my-auto w-full max-w-7xl mx-auto">
           <div className="lg:col-span-5 space-y-6">
-            <h1 className="text-3xl md:text-4xl xl:text-5xl font-bold tracking-tight uppercase leading-none wrap-break">
+            <Heading level="h1" className="wrap-break uppercase">
               {project.title}
-            </h1>
-            <p className="text-sm text-muted-foreground leading-relaxed max-w-md">{project.shortDescription}</p>
+            </Heading>
+            <Paragraph>{project.shortDescription}</Paragraph>
             <div className="flex flex-wrap gap-1.5 pt-2">
               {project.tags?.map((tag: string) => (
                 <Badge key={tag} variant="sky" className="font-mono text-xs uppercase rounded-sm tracking-wider">
@@ -103,7 +104,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
               />
             ) : (
               <div className="w-full h-full flex items-center justify-center bg-muted/5">
-                <span className="text-xs text-muted-foreground">No hero image available</span>
+                <Paragraph>No hero image available</Paragraph>
               </div>
             )}
           </div>
@@ -115,16 +116,15 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
       </header>
 
       <section className="container max-w-7xl mx-auto p-4 md:p-8 lg:p-12 grid grid-cols-1 lg:grid-cols-12 gap-12 pt-16">
-        {/* NARRATIVE CORE CONTEXT RUNTIME ENGINE */}
         <div className="lg:col-span-8 space-y-16">
           {project.blogNarrative &&
             project.blogNarrative.map((block: any, idx: number) => {
               const renderParagraphs = (textString: string) => {
                 if (!textString) return null;
                 return textString.split(/\n\s*\n/).map((paragraph, pIdx) => (
-                  <p key={pIdx} className="text-xs text-muted-foreground leading-relaxed">
+                  <Paragraph size="sm" key={pIdx}>
                     {paragraph.trim()}
-                  </p>
+                  </Paragraph>
                 ));
               };
 
@@ -132,11 +132,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                 case "text-only":
                   return (
                     <div key={idx} className="space-y-4 max-w-3xl">
-                      {block.heading && (
-                        <h2 className="text-sm font-bold uppercase tracking-wider text-foreground duration-75">
-                          {block.heading}
-                        </h2>
-                      )}
+                      {block.heading && <Heading level="h4">{block.heading}</Heading>}
                       {block.text && <div className="space-y-4">{renderParagraphs(block.text)}</div>}
                     </div>
                   );
@@ -144,11 +140,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                 case "full-width":
                   return (
                     <div key={idx} className="space-y-4">
-                      {block.heading && (
-                        <h2 className="text-sm font-bold uppercase tracking-wider text-foreground duration-75">
-                          {block.heading}
-                        </h2>
-                      )}
+                      {block.heading && <Heading level="h4">{block.heading}</Heading>}
                       {block.text && <div className="space-y-4 max-w-3xl mb-4">{renderParagraphs(block.text)}</div>}
                       {block.imageUrl && (
                         <Dialog>
@@ -192,11 +184,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
                   const isImgLeft = block.type === "split-left";
                   return (
                     <div key={idx} className="space-y-4">
-                      {block.heading && (
-                        <h2 className="text-sm font-bold uppercase tracking-wider text-foreground duration-75">
-                          {block.heading}
-                        </h2>
-                      )}
+                      {block.heading && <Heading level="h4">{block.heading}</Heading>}
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
                         <div className={`space-y-3 ${isImgLeft ? "md:order-last" : ""}`}>
                           {block.text && renderParagraphs(block.text)}
@@ -248,23 +236,44 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
         {/* PERSISTENT SYSTEM METRICS SIDEBAR LAYER */}
         <aside className="lg:col-span-4 lg:border-l border-muted-foreground/10 lg:pl-8 h-fit space-y-8 sticky top-8">
           <div className="space-y-4">
-            <h3 className="text-xs font-bold uppercase tracking-widest text-muted-foreground border-b border-muted-foreground/10 pb-2">
+            <Paragraph
+              size="xl"
+              weight="semibold"
+              color="foreground"
+              font="mono"
+              className="border-b border-muted-foreground/10 pb-2"
+            >
               DEPLOYMENT METRICS
-            </h3>
-            <div className="text-xs space-y-3 font-mono">
+            </Paragraph>
+            <div className="space-y-3">
               <div className="flex justify-between">
-                <span className="text-muted-foreground uppercase">STATUS:</span>{" "}
-                <span className={`font-bold uppercase ${getMetricTextColor(project.metrics)}`}>
+                <Paragraph size="xs" weight="medium" font="mono" className="text-muted-foreground uppercase">
+                  STATUS:
+                </Paragraph>
+                <Paragraph
+                  size="xs"
+                  weight="bold"
+                  font="mono"
+                  className={`uppercase ${getMetricTextColor(project.metrics)}`}
+                >
                   {project.metrics?.status}
-                </span>
+                </Paragraph>
               </div>
               <div className="flex justify-between">
-                <span className="text-muted-foreground uppercase">ENVIRONMENT:</span>{" "}
-                <span className="uppercase">{project.metrics?.environment}</span>
+                <Paragraph size="xs" weight="medium" font="mono" className="text-muted-foreground uppercase">
+                  ENVIRONMENT:
+                </Paragraph>
+                <Paragraph size="xs" weight="bold" font="mono" className="uppercase">
+                  {project.metrics?.environment}
+                </Paragraph>
               </div>
               <div className="flex justify-between">
-                <span className="text-muted-foreground uppercase">ROLE:</span>{" "}
-                <span className="uppercase">{project.metrics?.role}</span>
+                <Paragraph size="xs" weight="medium" font="mono" className="text-muted-foreground uppercase">
+                  ROLE:
+                </Paragraph>
+                <Paragraph size="xs" weight="bold" font="mono" className="uppercase">
+                  {project.metrics?.role}
+                </Paragraph>
               </div>
             </div>
           </div>
