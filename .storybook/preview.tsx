@@ -1,6 +1,7 @@
 import type { Preview } from "@storybook/nextjs-vite";
 import { withThemeByClassName } from "@storybook/addon-themes";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Toaster } from "../components/ui/sonner";
 import "../app/globals.css";
 
 const geistSans = Geist({
@@ -42,6 +43,7 @@ const preview: Preview = {
         className={`${geistSans.variable} ${geistMono.variable} bg-background text-foreground min-h-screen p-8 antialiased transition-colors duration-500`}
       >
         <Story />
+        <Toaster />
       </div>
     ),
   ],
