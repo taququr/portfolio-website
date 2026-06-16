@@ -10,8 +10,9 @@ import { sendEmail } from "@/lib/send-email";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Field, FieldGroup, FieldLabel, FieldError } from "@/components/ui/field";
+import { Heading, Paragraph } from "@/components/ui/typography";
 
 const contactFormSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -48,42 +49,56 @@ function AboutPage() {
   return (
     <div className="container mx-auto max-w-5xl py-10 px-4 space-y-4 md:space-y-10 font-sans">
       <header className="pt-20 pb-12 flex flex-col items-center text-center gap-4">
-        <h1 className="text-5xl font-bold tracking-tight">About & Philosophy</h1>
+        <Heading level="h1" className="group-data-[size=sm]/card:text-sm">
+          About & Philosophy
+        </Heading>
       </header>
 
       <section className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-        <div className="md:col-span-2 flex flex-col gap-6 text-muted-foreground leading-relaxed">
-          <p>
+        <div className="md:col-span-2 flex flex-col gap-6">
+          <Paragraph>
             I am a frontend-focused developer specializing in building reliable, type-safe, and highly performant web
             architectures. My approach to programming is grounded in predictability and robustness—ensuring smooth,
             error-free, and reliable user experiences.
-          </p>
-          <p>
+          </Paragraph>
+          <Paragraph>
             While my primary focus centers on frontend systems, my capabilities extend deeper into the architecture. I
             am experienced in establishing backend foundations and working directly with databases like PostgreSQL,
             alongside integrating modern headless CMS platforms like Strapi and Sanity to ensure dynamic, decoupled
             content delivery.
-          </p>
+          </Paragraph>
         </div>
 
         <Card className="bg-muted/30 border-dashed">
           <CardHeader className="pb-2">
-            <CardTitle className="text-sm font-mono uppercase tracking-wider text-sky-600 dark:text-sky-400">
+            <Paragraph size="sm" weight="semibold" font="mono" color="sky">
               System Stacks
-            </CardTitle>
+            </Paragraph>
           </CardHeader>
-          <CardContent className="text-xs font-mono space-y-4">
+          <CardContent className="space-y-4">
             <div>
-              <div className="font-semibold text-foreground">Core Engine:</div>
-              <div className="text-muted-foreground">Next.js 16 (App Router) • React 19 / SvelteKit • Svelte 5</div>
+              <Paragraph size="xs" weight="semibold" font="mono" color="foreground">
+                Core Engine:
+              </Paragraph>
+              <Paragraph size="xs" font="mono" color="muted">
+                Next.js 16 (App Router) • React 19 / SvelteKit • Svelte 5
+              </Paragraph>
             </div>
             <div>
-              <div className="font-semibold text-foreground">Styling:</div>
-              <div className="text-muted-foreground">Tailwind CSS v4 • shadcn/ui • Flowbite</div>
+              <Paragraph size="xs" weight="semibold" font="mono" color="foreground">
+                Styling:
+              </Paragraph>
+              <Paragraph size="xs" font="mono" color="muted">
+                Tailwind CSS v4 • shadcn/ui • Flowbite
+              </Paragraph>
             </div>
             <div>
-              <div className="font-semibold text-foreground">Database & CMS:</div>
-              <div className="text-muted-foreground">PostgreSQL • Strapi • Sanity</div>
+              <Paragraph size="xs" weight="semibold" font="mono" color="foreground">
+                Database & CMS:
+              </Paragraph>
+              <Paragraph size="xs" font="mono" color="muted">
+                PostgreSQL • Strapi • Sanity
+              </Paragraph>
             </div>
             {/* <div>
               <div className="font-semibold text-foreground">
@@ -99,10 +114,12 @@ function AboutPage() {
 
       <section className="border-t border-border pt-12">
         <div className="max-w-xl">
-          <h2 className="text-2xl font-bold tracking-tight mb-2">Get in Touch</h2>
-          <p className="text-sm text-muted-foreground mb-6">
+          <Heading level="h2" className="mb-2">
+            Get in Touch
+          </Heading>
+          <Paragraph size="sm" color="muted" className="mb-6">
             Have an application design, collaboration opportunity, or contract position? Drop a secure message below.
-          </p>
+          </Paragraph>
 
           <form id="contact-form" onSubmit={form.handleSubmit(onSubmit)}>
             <FieldGroup className="space-y-2 grid grid-cols-1 md:grid-cols-2 gap-4">

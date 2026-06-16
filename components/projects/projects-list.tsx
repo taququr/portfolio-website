@@ -12,7 +12,8 @@ import { formatDate } from "@/lib/utils";
 
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Heading, Paragraph } from "@/components/ui/typography";
 
 interface ProjectsListProps {
   projects: Project[];
@@ -34,15 +35,13 @@ export function ProjectsList({ projects }: ProjectsListProps) {
   return (
     <div className="container mx-auto max-w-5xl py-10 px-4 space-y-4 md:space-y-10 font-sans">
       <header className="pt-20 flex flex-col items-center text-center gap-4">
-        <h1 className="text-5xl font-bold tracking-tight">Projects & Works</h1>
-        <p className="text-xl text-muted-foreground max-w-xl">
-          Index of documented works, interesting projects, and systemic sanity tests.
-        </p>
+        <Heading level="h1">Projects & Works</Heading>
+        <Paragraph size="lg">Index of documented works, interesting projects, and systemic sanity tests.</Paragraph>
         <div className="pt-2 w-full">
           <Input
             type="search"
             placeholder="Filter by system parameter, engine, or tag... (e.g., Tailwind, DevOps)"
-            className="font-mono text-sm max-w-xl border-muted-foreground/30 focus-visible:ring-1 mx-auto"
+            className="font-mono text-sm max-w-2xl border-muted-foreground/30 focus-visible:ring-1 mx-auto"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
           />
@@ -82,11 +81,18 @@ export function ProjectsList({ projects }: ProjectsListProps) {
                                 isEven ? "md:text-left md:items-start" : "md:text-right md:items-end"
                               }`}
                             >
-                              <span className="text-xs font-mono dark:text-muted-foreground tracking-wider">
+                              <Paragraph size="xs" font="mono" className="tracking-wider">
                                 {formatDate(project._createdAt)}
-                              </span>
-                              <CardTitle>{project.title}</CardTitle>
-                              <CardDescription>{project.shortDescription}</CardDescription>
+                              </Paragraph>
+                              <Paragraph
+                                size="lg"
+                                color="foreground"
+                                weight="medium"
+                                className="group-data-[size=sm]/card:text-sm"
+                              >
+                                {project.title}
+                              </Paragraph>
+                              <Paragraph size="sm">{project.shortDescription}</Paragraph>
                             </CardHeader>
 
                             <CardContent
@@ -125,25 +131,6 @@ export function ProjectsList({ projects }: ProjectsListProps) {
                               )}
                             </div>
 
-                            {/* DYNAMIC SHADCN CARD OVERLAY MASK */}
-                            {/* <div
-                              className="hidden md:block absolute inset-0 w-full h-full"
-                              style={{
-                                background: isEven
-                                  ? `linear-gradient(to right, 
-                                    var(--card) 0%, 
-                                    var(--card) 55%, 
-                                    color-mix(in oklch, var(--card) 85%, transparent) 70%,
-                                    color-mix(in oklch, var(--card) 30%, transparent) 88%,
-                                    color-mix(in oklch, var(--card) 0%, transparent) 100%)`
-                                  : `linear-gradient(to left, 
-                                    var(--card) 0%, 
-                                    var(--card) 55%, 
-                                    color-mix(in oklch, var(--card) 85%, transparent) 70%,
-                                    color-mix(in oklch, var(--card) 30%, transparent) 88%,
-                                    color-mix(in oklch, var(--card) 0%, transparent) 100%)`,
-                              }}
-                            /> */}
                             <div
                               className={`hidden md:block absolute inset-0 w-full h-full z-20 transition-colors duration-500 ${
                                 isEven
@@ -163,9 +150,11 @@ export function ProjectsList({ projects }: ProjectsListProps) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="text-center py-12 border border-dashed border-muted-foreground/20 rounded-lg font-mono text-sm text-muted-foreground"
+                className="text-center py-12 border border-dashed border-muted-foreground/20 rounded-lg"
               >
-                No active project logs matching parameters found.
+                <Paragraph font="mono" size="sm" color="muted">
+                  No active project logs matching parameters found.
+                </Paragraph>
               </motion.div>
             )}
           </AnimatePresence>

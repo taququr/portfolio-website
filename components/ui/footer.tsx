@@ -11,7 +11,7 @@ export function Footer() {
   if (isStudioPage) return null;
 
   return (
-    <footer className="w-full border-t border-muted-foreground/10 py-6 px-4 mt-auto font-mono text-[11px] text-muted-foreground">
+    <footer className="w-full border-t border-muted-foreground/10 py-6 px-4 mt-auto font-mono text-xs font-semibold text-muted-foreground">
       <div className="max-w-5xl mx-auto flex justify-between items-center gap-4">
         <div>© {new Date().getFullYear()} // PORTFOLIO_WEBSITE_V3</div>
         <div className="flex items-center gap-6">
@@ -33,7 +33,7 @@ export function Footer() {
           </a>
           <Link
             href="/studio"
-            className="text-muted-foreground/30 hover:text-emerald-500 transition-colors duration-300 tracking-widest hidden md:block"
+            className="text-muted-foreground/30 hover:text-sky-700 dark:hover:text-sky-400 transition-colors duration-300 tracking-widest hidden md:block"
           >
             [<span className="group-hover:text-foreground">SYS_ADMIN</span>]
           </Link>
