@@ -6,7 +6,7 @@ import { ThemeToggle } from "@/components/ui/themeToggle";
 
 export function Navbar() {
   const pathname = usePathname();
-  const isStudioPage = pathname === "/studio" || pathname?.startsWith("/studio/");
+  const isStudioPage = pathname === "/studio" || pathname?.startsWith("/studio/") || pathname === "/privacy";
 
   const navItems = [
     { label: "Home", href: "/" },
