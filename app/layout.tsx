@@ -18,7 +18,21 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Taququr Portfolio",
   description: "Personal portfolio website",
-  keywords: ["Frontend Developer", "Next.js", "React", "TypeScript", "Tailwind CSS", "Sanity CMS"],
+  keywords: [
+    "Taqie",
+    "Taququr",
+    "Taqie Developer",
+    "Taqie Fadlillah",
+    "Frontend Developer",
+    "Next.js",
+    "React",
+    "TypeScript",
+    "Tailwind CSS",
+    "Sanity CMS",
+  ],
+  alternates: {
+    canonical: "https://www.taququr.com",
+  },
   authors: [{ name: "Taququr" }],
   creator: "Taququr",
   metadataBase: new URL("https://taququr.com"),
