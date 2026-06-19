@@ -2,6 +2,8 @@ export const dynamic = "force-dynamic";
 
 import Link from "next/link";
 import Image from "next/image";
+import { cache } from "react";
+import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { urlFor } from "@/sanity/lib/image";
 import { client } from "@/sanity/lib/client";
@@ -24,30 +26,72 @@ import {
 } from "@/components/ui/dialog";
 import { Heading, Paragraph } from "@/components/ui/typography";
 
+interface StaticProjectSlug {
+  slug: string;
+}
+
+export async function generateStaticParams(): Promise<{ slug: string }[]> {
+  const query = `*[_type == "project" && defined(slug.current)]{ "slug": slug.current }`;
+
+  try {
+    const projects = await client.fetch<StaticProjectSlug[]>(query, {}, { next: { revalidate: 3600 } });
+
+    if (!projects || projects.length === 0) return [];
+
+    return projects.map((project) => ({
+      slug: project.slug,
+    }));
+  } catch (error) {
+    console.error("Failed to generate static params from Sanity:", error);
+    return [];
+  }
+}
+
 interface ProjectPageProps {
   params: Promise<{ slug: string }>;
 }
 
-export async function generateStaticParams() {
-  const query = `*[_type == "project" && defined(slug.current)]{ "slug": slug.current }`;
-  const projects = await client.fetch<{ slug: string }[]>(query);
-
-  if (!projects) return [];
-
-  return projects.map((project) => ({
-    slug: project.slug,
-  }));
-}
-
-export default async function ProjectDetailPage({ params }: ProjectPageProps) {
-  const { slug } = await params;
-
+const getProject = cache(async (slug: string): Promise<Project | null> => {
   const response = await sanityFetch({
     query: singleProjectQuery,
     params: { slug },
   });
+  return (response?.data as Project) || null;
+});
 
-  const project = response.data as Project | null;
+export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const project = await getProject(slug);
+
+  if (!project) {
+    return {
+      title: "Project Not Found | Taququr Portfolio",
+    };
+  }
+
+  return {
+    title: `${project.title} | Taqie Fadlillah`,
+    description: project.shortDescription || `Case study for ${project.title} developed by Taququr.`,
+    keywords: ["Taqie", "Taququr", "Taqie Developer", "Taqie Fadlillah", ...(project.tags || [])],
+    openGraph: {
+      title: `${project.title} | Creative Frontend Developer Portfolio`,
+      description: project.shortDescription || "",
+      url: `https://taququr.com/projects/${slug}`,
+      images: [
+        {
+          url: "/og-image.webp", // You can safely swap this to project?.heroImage?.asset?.url later!
+          width: 1200,
+          height: 630,
+          alt: `${project.title} Preview Image`,
+        },
+      ],
+    },
+  };
+}
+
+export default async function ProjectDetailPage({ params }: ProjectPageProps) {
+  const { slug } = await params;
+  const project = await getProject(slug);
 
   if (!project) notFound();
 

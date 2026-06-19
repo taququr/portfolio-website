@@ -12,6 +12,11 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  // logging: {
+  //   fetches: {
+  //     fullUrl: true,
+  //   },
+  // },
   experimental: {
     viewTransition: true,
     serverActions: {
