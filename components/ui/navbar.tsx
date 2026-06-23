@@ -3,8 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-import { track } from "@/lib/analytics";
-
 import { ThemeToggle } from "@/components/ui/themeToggle";
 
 export function Navbar() {
@@ -24,7 +22,7 @@ export function Navbar() {
           {navItems.map((item) => {
             const isActive = pathname === item.href;
             return (
-              <Link key={item.href} href={item.href} onClick={() => track(item.label)}>
+              <Link key={item.href} href={item.href}>
                 <span
                   className={`px-3 py-1.5 rounded-xl text-sm font-medium transition-colors cursor-pointer ${
                     isActive ? "bg-secondary text-secondary-foreground" : "text-muted-foreground hover:text-foreground"

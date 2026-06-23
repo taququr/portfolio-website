@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { track } from "@/lib/analytics";
+import { TrackedLink } from "@/components/ui/tracked-link";
 
 export function Footer() {
   const pathname = usePathname();
@@ -18,13 +19,13 @@ export function Footer() {
         <div className="flex flex-col md:flex-row gap-1">
           <div>© {new Date().getFullYear()} // PORTFOLIO_WEBSITE_V3 </div>
           <div className="hidden md:block">|</div>
-          <Link
+          <TrackedLink
             href="/privacy"
+            eventName="Privacy Link Clicked"
             className="text-muted-foreground/30 hover:text-sky-700 dark:hover:text-sky-400 transition-colors duration-300 tracking-widest"
-            onClick={() => track("Privacy")}
           >
             [<span className="group-hover:text-foreground">PRIVACY</span>]
-          </Link>
+          </TrackedLink>
         </div>
         <div className="flex items-center gap-6">
           {/* <a

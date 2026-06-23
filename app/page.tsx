@@ -7,12 +7,12 @@ import { sanityFetch } from "@/sanity/lib/live";
 import type { Project } from "@/sanity.types";
 
 import { allProjectsQuery } from "@/lib/queries";
-import { track } from "@/lib/analytics";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { TrackedLink } from "@/components/ui/tracked-link";
 import { Heading, Paragraph } from "@/components/ui/typography";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default async function Home() {
   const response = await sanityFetch({
@@ -43,9 +43,10 @@ export default async function Home() {
               key={project._id}
               className="md:col-span-1 col-span-2 border border-muted-foreground/10 hover:border-foreground/30"
             >
-              <Link
+              <TrackedLink
                 href={`/projects/${project.slug?.current}`}
-                onClick={() => track("Project Card Clicked", { title: project.title })}
+                eventName="Project Card Clicked"
+                properties={{ title: project.title }}
               >
                 <CardHeader>
                   <div className="flex flex-wrap gap-2 pb-2">
@@ -67,14 +68,14 @@ export default async function Home() {
                     Learn more &rarr;
                   </Button>
                 </CardContent>
-              </Link>
+              </TrackedLink>
             </Card>
           ))
         ) : (
           <Paragraph>No projects found</Paragraph>
         )}
         <Card className="col-span-2 border border-muted-foreground/10 hover:border-foreground/30">
-          <Link href="/projects" onClick={() => track("Project Card Clicked", { title: "Projects" })}>
+          <Link href="/projects">
             <CardHeader>
               <CardTitle>More Projects</CardTitle>
               <CardDescription>Check out my other projects</CardDescription>

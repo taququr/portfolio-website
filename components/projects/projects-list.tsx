@@ -1,20 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { urlFor } from "@/sanity/lib/image";
 
 import type { Project } from "@/sanity.types";
 
-import { track } from "@/lib/analytics";
 import { formatDate } from "@/lib/utils";
 
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Heading, Paragraph } from "@/components/ui/typography";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { TrackedLink } from "@/components/ui/tracked-link";
 
 interface ProjectsListProps {
   projects: Project[];
@@ -70,10 +69,11 @@ export function ProjectsList({ projects }: ProjectsListProps) {
                       opacity: { duration: 0.25 },
                     }}
                   >
-                    <Link
+                    <TrackedLink
                       href={`/projects/${project.slug?.current}`}
+                      eventName="Project Card Clicked"
+                      properties={{ title: project.title }}
                       className="group block w-full"
-                      onClick={() => track("Project Card Clicked", { title: project.title })}
                     >
                       <Card className="relative py-0 w-full min-h-60 md:h-52 justify-center">
                         <div className="flex flex-col min-h-60 md:h-52 relative w-full">
@@ -146,7 +146,7 @@ export function ProjectsList({ projects }: ProjectsListProps) {
                           </div>
                         </div>
                       </Card>
-                    </Link>
+                    </TrackedLink>
                   </motion.div>
                 );
               })
