@@ -1,12 +1,14 @@
 import type { Metadata } from "next";
+import NextTopLoader from "nextjs-toploader";
 import { Analytics } from "@vercel/analytics/next";
-import { ThemeProvider } from "@/components/theme-provider";
 import { Geist, Geist_Mono } from "next/font/google";
+import { SanityLive } from "@/sanity/lib/live";
+
+import { ThemeProvider } from "@/components/theme-provider";
 import { Navbar } from "@/components/ui/navbar";
 import { Toaster } from "@/components/ui/sonner";
-import { SanityLive } from "@/sanity/lib/live";
 import { Footer } from "@/components/ui/footer";
-import NextTopLoader from "nextjs-toploader";
+
 import "./globals.css";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });

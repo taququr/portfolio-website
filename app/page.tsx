@@ -1,13 +1,13 @@
 export const dynamic = "force-dynamic";
 
 import Link from "next/link";
-import { sanityFetch } from "@/sanity/lib/live";
 import { notFound } from "next/navigation";
-import { track } from "@vercel/analytics";
+import { sanityFetch } from "@/sanity/lib/live";
 
 import type { Project } from "@/sanity.types";
 
 import { allProjectsQuery } from "@/lib/queries";
+import { track } from "@/lib/analytics";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";

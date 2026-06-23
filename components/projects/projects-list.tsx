@@ -4,17 +4,17 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
-import { track } from "@vercel/analytics";
 import { urlFor } from "@/sanity/lib/image";
 
 import type { Project } from "@/sanity.types";
 
+import { track } from "@/lib/analytics";
 import { formatDate } from "@/lib/utils";
 
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Heading, Paragraph } from "@/components/ui/typography";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 
 interface ProjectsListProps {
   projects: Project[];

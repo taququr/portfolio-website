@@ -11,9 +11,9 @@ import { sanityFetch } from "@/sanity/lib/live";
 
 import type { Project } from "@/sanity.types";
 
-import { formatDate, getImageDimensions } from "@/lib/utils";
 import { singleProjectQuery } from "@/lib/queries";
 import { getMetricTextColor } from "@/lib/text-color";
+import { formatDate, getImageDimensions } from "@/lib/utils";
 
 import { Badge } from "@/components/ui/badge";
 import {

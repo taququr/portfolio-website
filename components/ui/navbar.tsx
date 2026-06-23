@@ -1,8 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { track } from "@vercel/analytics";
 import { usePathname } from "next/navigation";
+
+import { track } from "@/lib/analytics";
+
 import { ThemeToggle } from "@/components/ui/themeToggle";
 
 export function Navbar() {

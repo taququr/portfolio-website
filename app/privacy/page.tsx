@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
 import { ArrowUp } from "lucide-react";
 import { animate } from "framer-motion";
 import cleanHTML from "@/lib/termly-data";
+import { Button } from "@/components/ui/button";
 
 export default function PrivacyPage() {
   const [isVisible, setIsVisible] = useState(false);

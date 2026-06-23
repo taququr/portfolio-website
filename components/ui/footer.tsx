@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { track } from "@vercel/analytics";
+
+import { track } from "@/lib/analytics";
 
 export function Footer() {
   const pathname = usePathname();

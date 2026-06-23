@@ -1,6 +1,6 @@
 {
   "name": "portfolio-website",
-  "version": "0.3.10",
+  "version": "0.3.12",
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
@@ -14,6 +14,7 @@
     "@sanity/image-url": "^2.1.1",
     "@sanity/vision": "5",
     "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^12.40.0",
