@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { track } from "@vercel/analytics";
 import { urlFor } from "@/sanity/lib/image";
 
 import type { Project } from "@/sanity.types";
@@ -69,7 +70,11 @@ export function ProjectsList({ projects }: ProjectsListProps) {
                       opacity: { duration: 0.25 },
                     }}
                   >
-                    <Link href={`/projects/${project.slug?.current}`} className="group block w-full">
+                    <Link
+                      href={`/projects/${project.slug?.current}`}
+                      className="group block w-full"
+                      onClick={() => track("Project Card Clicked", { title: project.title })}
+                    >
                       <Card className="relative py-0 w-full min-h-60 md:h-52 justify-center">
                         <div className="flex flex-col min-h-60 md:h-52 relative w-full">
                           <div

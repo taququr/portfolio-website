@@ -79,7 +79,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
       url: `https://taququr.com/projects/${slug}`,
       images: [
         {
-          url: "/og-image.webp", // You can safely swap this to project?.heroImage?.asset?.url later!
+          url: "/og-image.webp",
           width: 1200,
           height: 630,
           alt: `${project.title} Preview Image`,

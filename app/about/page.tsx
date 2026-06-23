@@ -4,6 +4,7 @@ import { z } from "zod";
 import { toast } from "sonner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
+import { track } from "@vercel/analytics";
 
 import { sendEmail } from "@/lib/send-email";
 
@@ -43,6 +44,8 @@ function AboutPage() {
       }
     } catch (error) {
       console.error("Failed to send email:", error);
+    } finally {
+      track("Contact Form Submit");
     }
   };
 

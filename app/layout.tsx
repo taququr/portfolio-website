@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Navbar } from "@/components/ui/navbar";
@@ -84,7 +85,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased transition-colors duration-500 bg-background min-h-screen flex flex-col`}
       >
         <NextTopLoader
-          color="#38bdf8" // Sky blue matching your tags
+          color="#38bdf8"
           initialPosition={0.08}
           crawlSpeed={200}
           height={3}
@@ -100,6 +101,7 @@ export default function RootLayout({
           <SanityLive onWelcome={false} />
           <Footer />
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );

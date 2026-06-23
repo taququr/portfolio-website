@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { track } from "@vercel/analytics";
 
 export function Footer() {
   const pathname = usePathname();
@@ -19,6 +20,7 @@ export function Footer() {
           <Link
             href="/privacy"
             className="text-muted-foreground/30 hover:text-sky-700 dark:hover:text-sky-400 transition-colors duration-300 tracking-widest"
+            onClick={() => track("Privacy")}
           >
             [<span className="group-hover:text-foreground">PRIVACY</span>]
           </Link>
@@ -37,6 +39,7 @@ export function Footer() {
             target="_blank"
             rel="noreferrer"
             className="hover:text-foreground transition-colors"
+            onClick={() => track("LinkedIn")}
           >
             LINKEDIN
           </a>

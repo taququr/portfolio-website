@@ -3,6 +3,7 @@ export const dynamic = "force-dynamic";
 import Link from "next/link";
 import { sanityFetch } from "@/sanity/lib/live";
 import { notFound } from "next/navigation";
+import { track } from "@vercel/analytics";
 
 import type { Project } from "@/sanity.types";
 
@@ -42,7 +43,10 @@ export default async function Home() {
               key={project._id}
               className="md:col-span-1 col-span-2 border border-muted-foreground/10 hover:border-foreground/30"
             >
-              <Link href={`/projects/${project.slug?.current}`}>
+              <Link
+                href={`/projects/${project.slug?.current}`}
+                onClick={() => track("Project Card Clicked", { title: project.title })}
+              >
                 <CardHeader>
                   <div className="flex flex-wrap gap-2 pb-2">
                     {project.tags.map((tag: string, index: number) => (
@@ -70,7 +74,7 @@ export default async function Home() {
           <Paragraph>No projects found</Paragraph>
         )}
         <Card className="col-span-2 border border-muted-foreground/10 hover:border-foreground/30">
-          <Link href="/projects">
+          <Link href="/projects" onClick={() => track("Project Card Clicked", { title: "Projects" })}>
             <CardHeader>
               <CardTitle>More Projects</CardTitle>
               <CardDescription>Check out my other projects</CardDescription>
