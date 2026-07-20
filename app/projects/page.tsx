@@ -5,13 +5,14 @@ import { notFound } from "next/navigation";
 
 import type { Project } from "@/sanity.types";
 
-import { allProjectsQuery } from "@/lib/queries";
+import { allProjectsQueryProjects } from "@/lib/queries";
 
 import { ProjectsList } from "@/components/projects/projects-list";
 
 export default async function ProjectsPage() {
   const response = await sanityFetch({
-    query: allProjectsQuery,
+    query: allProjectsQueryProjects,
+    params: { start: 0, limit: 10 },
   });
 
   const projects = response.data as Project[] | null;

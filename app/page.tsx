@@ -6,7 +6,7 @@ import { sanityFetch } from "@/sanity/lib/live";
 
 import type { Project } from "@/sanity.types";
 
-import { allProjectsQuery } from "@/lib/queries";
+import { allProjectsQueryHome } from "@/lib/queries";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -16,7 +16,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 
 export default async function Home() {
   const response = await sanityFetch({
-    query: allProjectsQuery,
+    query: allProjectsQueryHome,
+    params: { start: 0, limit: 4 },
   });
 
   const projects = response.data as Project[] | null;
@@ -38,7 +39,7 @@ export default async function Home() {
       </Heading>
       <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {projects.length > 0 ? (
-          projects.slice(0, 4).map((project: any) => (
+          projects.map((project: any) => (
             <Card
               key={project._id}
               className="md:col-span-1 col-span-2 border border-muted-foreground/10 hover:border-foreground/30"
