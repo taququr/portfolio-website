@@ -77,6 +77,22 @@ export const metadata: Metadata = {
   },
 };
 
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Taqie Fadlillah",
+  alternateName: ["Taququr"],
+  url: "https://taququr.com",
+  jobTitle: "Frontend Developer",
+  description: "A frontend developer passionate about building responsive and performance-optimized web applications.",
+  knowsAbout: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Sanity CMS"],
+  sameAs: [
+    // "https://twitter.com/your_handle", // Replace with your actual handles
+    "https://github.com/taququr",
+    "https://linkedin.com/in/taqie-fadlillah",
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -84,6 +100,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased transition-colors duration-500 bg-background min-h-screen flex flex-col`}
       >
